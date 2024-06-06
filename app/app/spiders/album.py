@@ -1,23 +1,42 @@
-from pathlib import Path
-
 import scrapy
 
 
 class QuotesSpider(scrapy.Spider):
     name = "album"
 
-
     def start_requests(self):
-        artist_name = "daft punk"
-        album_name = "discovery"
+        artist_name = "Des Rocs"
+        album_name = "Dream Machine"
 
         urls = [
-            "https://genius.com/albums/" + artist_name.replace(" ", "-") + "/" + album_name.replace(" ", "-")
+            "https://genius.com/albums/"
+            + artist_name.replace(" ", "-")
+            + "/"
+            + album_name.replace(" ", "-")
         ]
+        print(urls)
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse, cb_kwargs={'artist':album_name.replace(" ", "-")})
+            yield scrapy.Request(
+                url=url,
+                callback=self.parse_album,
+                cb_kwargs={
+                    "artist_name": artist_name.replace(" ", "-"),
+                    "album_name": album_name.replace(" ", "-"),
+                },
+            )
 
-    def parse(self, response, artist):
-        for but in response.xpath('//a[contains(@href, "' + artist.capitalize() + '")]'):
-            print("HERE1", but)
-        print("HERE2", response)
+    def parse_song(self, response):
+        for lyric in response.xpath(
+            '//div[@class="Lyrics__Container-sc-1ynbvzw-1 kUgSbL"]//text()'
+        ).extract():
+            print(lyric)
+
+    def parse_album(self, response, artist_name, album_name):
+        for track in response.xpath(
+            '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a/@href'
+        ).extract():
+            yield scrapy.Request(
+                url=track,
+                callback=self.parse_song,
+            )
+        print("response:", response)
