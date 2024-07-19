@@ -14,6 +14,14 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+## Usage
+
+```
+cd app/
+source env/bin/activate
+scrapy crawl album -O data.json
+```
+
 ## Versions
 
 - Python 3.10.12
