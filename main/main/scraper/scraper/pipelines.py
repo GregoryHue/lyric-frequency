@@ -5,10 +5,12 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
+from asgiref.sync import sync_to_async
 
 
-class ScraperPipeline:
+class ScraperPipeline(object):
+    @sync_to_async
     def process_item(self, item, spider):
         print(item)
+        item.save()
         return item

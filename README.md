@@ -10,7 +10,7 @@ Install python libraries with:
 ```
 virtualenv --python="/usr/bin/python3" env 
 source env/bin/activate
-cd app/
+cd main/
 pip install -r requirements.txt
 ```
 
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 ```
 source env/bin/activate
-cd app/
+cd main/
 scrapy crawl album -O data.json
 ```
 
@@ -30,7 +30,7 @@ scrapy crawl album -O data.json
 ## Structure
 
 ```
-app/
+main/
 .gitignore
 LICENSE
 README.md
