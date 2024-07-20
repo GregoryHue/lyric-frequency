@@ -8,17 +8,17 @@
 Install python libraries with:
 
 ```
-cd app/
 virtualenv --python="/usr/bin/python3" env 
 source env/bin/activate
+cd app/
 pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```
-cd app/
 source env/bin/activate
+cd app/
 scrapy crawl album -O data.json
 ```
 
@@ -29,10 +29,12 @@ scrapy crawl album -O data.json
 
 ## Structure
 
+```
 app/
 .gitignore
 LICENSE
 README.md
+```
 
 ## References
 
