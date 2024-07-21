@@ -5,8 +5,20 @@
 
 from scrapy_djangoitem import DjangoItem
 
-from main.web.models import Artist
+from main.web.models import Artist, Album, Track, Lyric
 
 
-class ScraperItem(DjangoItem):
+class ArtistItem(DjangoItem):
     django_model = Artist
+
+
+class AlbumItem(DjangoItem):
+    django_model = Album
+
+    
+class TrackItem(DjangoItem):
+    django_model = Track
+
+    
+class LyricItem(DjangoItem):
+    django_model = Lyric
