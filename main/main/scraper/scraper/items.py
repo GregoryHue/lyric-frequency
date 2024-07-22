@@ -5,7 +5,7 @@
 
 from scrapy_djangoitem import DjangoItem
 
-from main.web.models import Artist, Album, Track, Lyric
+from main.django.models import Artist, Album, Track, Lyric
 
 
 class ArtistItem(DjangoItem):

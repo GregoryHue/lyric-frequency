@@ -8,10 +8,7 @@ class AlbumSpider(scrapy.Spider):
     full_lyrics = []
     song = []
 
-    def start_requests(self):
-        artist_name = "Daft Punk"
-        album_name = "Discovery"
-
+    def start_requests(self, artist_name, album_name):
         urls = [
             "https://genius.com/albums/"
             + artist_name.replace(" ", "-")

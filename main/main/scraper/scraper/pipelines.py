@@ -8,7 +8,7 @@
 from asgiref.sync import sync_to_async
 from django.db.utils import IntegrityError
 
-from main.web.models import Artist, Album, Track, Lyric
+from main.django.models import Artist, Album, Track, Lyric
 
 
 class ScraperPipeline(object):
