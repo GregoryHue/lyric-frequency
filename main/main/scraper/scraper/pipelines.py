@@ -8,34 +8,22 @@
 from asgiref.sync import sync_to_async
 from django.db.utils import IntegrityError
 
-from main.django.models import Artist, Album, Track, Lyric
+from main.django.models import Album, Track
 
 
 class ScraperPipeline(object):
     @sync_to_async
     def process_item(self, item, spider):
-        if item.django_model == Artist:
-            try:
-                item.save()
-            except(IntegrityError):
-                pass
         if item.django_model == Album:
-            item['artist'] = Artist.objects.get(name=item['artist'])
             try:
                 item.save()
-            except(IntegrityError):
+            except IntegrityError:
                 pass
         if item.django_model == Track:
             try:
-                item['album'] = Album.objects.get(name=item['album'])
-                item['artist'] = Artist.objects.get(name=item['artist'])
-                item.save()
-            except(IntegrityError):
-                pass
-        if item.django_model == Lyric:
-            item['track'] = Track.objects.get(name=item['track'])
-            try:
-                item.save()
-            except(IntegrityError):
+                if "track_name" in item:
+                    item["album"] = Album.objects.get(album_name=item["album"])
+                    item.save()
+            except IntegrityError:
                 pass
         return item

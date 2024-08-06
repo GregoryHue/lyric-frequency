@@ -9,14 +9,20 @@ class Command(BaseCommand):
     help = "Release spider"
 
     def add_arguments(self, parser):
-        parser.add_argument("-O", "--output", type=str)
+        parser.add_argument("-S", "--artist_name", type=str)
+        parser.add_argument("-A", "--album_name", type=str)
 
     def handle(self, *args, **options):
         crawler_settings = Settings()
         crawler_settings.setmodule(my_settings)
-        output = options["output"] if options["output"] else None
+        if options["artist_name"] is not None and options["album_name"] is not None:
+            artist_name = options["artist_name"]
+            album_name = options["album_name"]
 
-        process = CrawlerProcess(settings=crawler_settings)
+            process = CrawlerProcess(settings=crawler_settings)
+            print(artist_name, album_name)
 
-        process.crawl(AlbumSpider, output)
-        process.start()
+            process.crawl(AlbumSpider, artist_name=artist_name, album_name=album_name)
+            process.start(install_signal_handlers=False)
+        else:
+            raise Exception("Enter a valid artist name and album name.")

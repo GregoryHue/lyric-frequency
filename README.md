@@ -8,18 +8,22 @@
 Install python libraries with:
 
 ```
+cd main/
 virtualenv --python="/usr/bin/python3" env 
 source env/bin/activate
-cd main/
 pip install -r requirements.txt
+python manage.py makemigrations django
+python manage.py migrate
+python manage.py tailwind install
 ```
 
 ## Usage
 
 ```
-source env/bin/activate
 cd main/
-scrapy crawl album -O data.json
+source env/bin/activate
+python manage.py runserver
+python manage.py tailwind start
 ```
 
 ## Versions

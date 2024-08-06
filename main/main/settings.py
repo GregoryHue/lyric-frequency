@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "main.web",
     "tailwind",
     "django_browser_reload",
+    'rest_framework',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
