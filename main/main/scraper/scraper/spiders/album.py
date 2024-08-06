@@ -13,8 +13,8 @@ class AlbumSpider(scrapy.Spider):
     def start_requests(
         self,
     ):
-        artist_name = self.artist_name
-        album_name = self.album_name
+        artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
+        album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
         urls = [
             "https://genius.com/albums/"
             + artist_name.replace(" ", "-")
@@ -41,7 +41,6 @@ class AlbumSpider(scrapy.Spider):
             '//div[@class="Lyrics__Container-sc-1ynbvzw-1 kUgSbL"]//text()'
         ).extract():
             lyrics = lyrics + lyric.replace("\n", " ") + " "
-        lyrics = re.sub(r"\[.*?\]", "", lyrics)
         lyrics = re.sub(r"\[.*?\]", "", lyrics)
         track_item.add_value("lyrics", lyrics)
         yield track_item.load_item()

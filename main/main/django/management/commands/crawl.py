@@ -20,7 +20,6 @@ class Command(BaseCommand):
             album_name = options["album_name"]
 
             process = CrawlerProcess(settings=crawler_settings)
-            print(artist_name, album_name)
 
             process.crawl(AlbumSpider, artist_name=artist_name, album_name=album_name)
             process.start(install_signal_handlers=False)

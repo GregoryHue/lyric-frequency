@@ -11,9 +11,17 @@
 </head>
 
 <body class="bg-slate-900 font-sans leading-normal tracking-normal">
-	<div class="h-screen w-full">
-		<div class="min-h-64 w-96 mx-auto mt-20 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
-			Here
+	<div class="h-screen w-full p-8">
+		<div class="mx-auto mt-20 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
+			<h3 class="text-white text-2xl">{{data.artist_name}}</h3>
+			<h3 class="text-white text-4xl">{{data.album_name}}</h3>
+			<div class="mx-auto mt-4 rounded-3xl p-6 shadow border bg-gray-700 border-gray-600">
+				{% for track in data.tracks %}
+				<div class="p-2">
+					{{ track.graph|safe }}
+				</div>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 </body>

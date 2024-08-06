@@ -27,6 +27,3 @@ class Track(models.Model):
             "track_name",
             "album",
         )
-
-    def __str__(self):
-        return self.track_name
