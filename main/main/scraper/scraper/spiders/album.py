@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from main.scraper.scraper.items import AlbumItem, TrackItem
-from scrapy.loader.processors import TakeFirst
+from itemloaders.processors import TakeFirst
 import re
 
 

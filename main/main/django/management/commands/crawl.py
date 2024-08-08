@@ -3,6 +3,13 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from main.scraper.scraper import settings as my_settings
 from main.scraper.scraper.spiders.album import AlbumSpider
+from multiprocessing.context import Process
+
+
+def crawl(crawler_settings, artist_name, album_name):
+    process = CrawlerProcess(settings=crawler_settings)
+    process.crawl(AlbumSpider, artist_name=artist_name, album_name=album_name)
+    process.start(install_signal_handlers=False)
 
 
 class Command(BaseCommand):
@@ -19,9 +26,10 @@ class Command(BaseCommand):
             artist_name = options["artist_name"]
             album_name = options["album_name"]
 
-            process = CrawlerProcess(settings=crawler_settings)
-
-            process.crawl(AlbumSpider, artist_name=artist_name, album_name=album_name)
-            process.start(install_signal_handlers=False)
+            process = Process(
+                target=crawl, args=(crawler_settings, artist_name, album_name)
+            )
+            process.start()
+            process.join()
         else:
             raise Exception("Enter a valid artist name and album name.")
