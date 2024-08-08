@@ -34,6 +34,7 @@ numpy==2.0.1
 packaging==24.1
 pandas==2.2.2
 parsel==1.9.1
+pillow==10.4.0
 plotly==5.23.0
 Protego==0.3.1
 pyasn1==0.6.0
@@ -51,6 +52,7 @@ queuelib==1.7.0
 requests==2.32.3
 requests-file==2.1.0
 rich==13.7.1
+ruff==0.5.6
 Scrapy==2.11.2
 scrapy-djangoitem==1.1.1
 service-identity==24.1.0

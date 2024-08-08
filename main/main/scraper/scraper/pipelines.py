@@ -16,7 +16,6 @@ class ScraperPipeline(object):
     def process_item(self, item, spider):
         if item.django_model == Album:
             try:
-                print(item)
                 item.save()
             except IntegrityError:
                 pass

@@ -13,6 +13,7 @@ class AlbumSpider(scrapy.Spider):
     def start_requests(
         self,
     ):
+        # Reading user input and removing special characters
         artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
         album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
         urls = [
@@ -21,14 +22,16 @@ class AlbumSpider(scrapy.Spider):
             + "/"
             + album_name.replace(" ", "-")
         ]
-        print(urls)
+        # Fetching lyrics from Genius.com
         for url in urls:
+            print(url)
             yield scrapy.Request(
                 url=url,
                 callback=self.parse_album,
+                cb_kwargs={"genius_url": url},
             )
 
-    def parse_song(self, response, artist_name, album_name):
+    def parse_song(self, response, album_name):
         track_item = ItemLoader(item=TrackItem(), response=response)
         track_item.default_output_processor = TakeFirst()
         track_name = response.xpath(
@@ -41,13 +44,19 @@ class AlbumSpider(scrapy.Spider):
             '//div[@class="Lyrics__Container-sc-1ynbvzw-1 kUgSbL"]//text()'
         ).extract():
             lyrics = lyrics + lyric.replace("\n", " ") + " "
+        # Ignoring lines such as: [Verse 1]
         lyrics = re.sub(r"\[.*?\]", "", lyrics)
         track_item.add_value("lyrics", lyrics)
         yield track_item.load_item()
 
-    def parse_album(self, response):
+    def parse_album(self, response, genius_url):
         album_item = ItemLoader(item=AlbumItem(), response=response)
         album_item.default_output_processor = TakeFirst()
+        album_item.add_value("genius_url", genius_url)
+        album_image = response.xpath(
+            '//div[@class="header_with_cover_art-inner column_layout"]//img/@src'
+        ).extract_first()
+        album_item.add_value("album_image_url", album_image)
         artist_name = response.xpath(
             '//div[@class="header_with_cover_art-primary_info"]//h2//a//text()'
         ).get()
@@ -63,5 +72,5 @@ class AlbumSpider(scrapy.Spider):
             yield scrapy.Request(
                 url=track,
                 callback=self.parse_song,
-                cb_kwargs={"artist_name": artist_name, "album_name": album_name},
+                cb_kwargs={"album_name": album_name},
             )

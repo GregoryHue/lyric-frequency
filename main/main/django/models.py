@@ -6,6 +6,8 @@ from django.db import models
 class Album(models.Model):
     album_name = models.CharField(max_length=255, null=False)
     artist_name = models.CharField(max_length=255, null=False)
+    album_image_url = models.CharField(max_length=255, null=False)
+    genius_url = models.CharField(max_length=255, null=False)
 
     class Meta:
         unique_together = (

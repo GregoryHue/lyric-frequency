@@ -12,16 +12,30 @@
 
 <body class="bg-slate-900 font-sans leading-normal tracking-normal">
 	<div class="h-screen w-full p-8">
-		<div class="mx-auto mt-20 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
-			<h3 class="text-white text-2xl">{{data.artist_name}}</h3>
-			<h3 class="text-white text-4xl">{{data.album_name}}</h3>
-			<div class="mx-auto mt-4 rounded-3xl p-6 shadow border bg-gray-700 border-gray-600">
-				{% for track in data.tracks %}
+		<img class="w-40 h-40" src="{{data.album_image_url}}"/>
+		<h3 class="text-white text-4xl">{{data.album_name}}</h3>
+		<h3 class="text-white text-2xl">{{data.artist_name}}</h3>
+		<div class="my-4">
+		<h3 class="text-gray-300 text-base">Lyrics from:</h3>
+		<a class="text-gray-300 text-base" href="{{data.genius_url}}"><u>{{data.genius_url}}</u></a>
+		</div>
+		<div class="mx-auto rounded-3xl p-2 shadow border bg-gray-800 border-gray-700">
+		{% for track in data.tracks %}
+			{% if track.graph %}
 				<div class="p-2">
 					{{ track.graph|safe }}
 				</div>
-				{% endfor %}
-			</div>
+			{% else %}
+				<div class="p-2">
+					<h3 class="text-white text-xl">
+						No lyrics found for: {{ track.track_name}}
+					</h3>
+				</div>
+			{% endif %}
+			{% if not forloop.last %}
+				<hr  class="block h-[1px] border-t-[1px] mx-4"/>
+			{% endif %}
+		{% endfor %}
 		</div>
 	</div>
 </body>

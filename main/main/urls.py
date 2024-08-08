@@ -23,13 +23,13 @@ from rest_framework import routers
 from main.django.viewsets import AlbumViewSet
 
 router = routers.DefaultRouter()
-router.register(r'albums', AlbumViewSet)
+router.register(r"albums", AlbumViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("get/", get.get, name="get"),
-    path("post/", post.post, name="post"),    
-    path('api-view/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path("post/", post.post, name="post"),
+    path("api-view/", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
