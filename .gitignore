@@ -2,6 +2,7 @@ data.json
 env/
 .env
 .ruff_cache
+staticfiles/
 static/
 media/
 

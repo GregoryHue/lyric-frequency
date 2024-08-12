@@ -8,8 +8,8 @@ services:
     plan: free
     name: album-word-disparity
     runtime: python
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn main.wsgi"    
+    buildCommand: "./main/build.sh"
+    startCommand: "cd main && python -m gunicorn main.wsgi"    
     envVars:
       - key: SECRET_KEY
         generateValue: true
