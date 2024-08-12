@@ -7,11 +7,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
 	{% tailwind_css %}
 </head>
 
 <body class="bg-slate-900 font-sans leading-normal tracking-normal">
-	<div class="h-screen w-full">
+	<div class="w-full">
 		<div class="min-h-64 w-96 mx-auto mt-20 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
 			<form action="../post/" method="POST">
 				{% csrf_token %}
