@@ -27,6 +27,7 @@ router.register(r"albums", AlbumViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", get.get, name="get"),
     path("get/", get.get, name="get"),
     path("post/", post.post, name="post"),
     path("api-view/", include(router.urls)),
