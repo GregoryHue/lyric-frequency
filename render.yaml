@@ -1,0 +1,17 @@
+databases:
+  - name: album-word-disparity
+    plan: free
+    user: mysite
+
+services:
+  - type: web
+    plan: free
+    name: album-word-disparity
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn main.wsgi"    
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
