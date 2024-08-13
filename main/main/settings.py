@@ -95,7 +95,7 @@ WSGI_APPLICATION = "main.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://awd_user:" + os.getenv("POSTGRES_PASSWORD") + "@localhost:5432/postgres", conn_max_age=600
+        default="postgresql://awd_user:" + os.getenv("POSTGRES_PASSWORD") + "@localhost:5432/awd_db", conn_max_age=600
     )
 }
 

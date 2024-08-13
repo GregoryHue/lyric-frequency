@@ -32,6 +32,8 @@ Create our user:
 
 ```
 CREATE ROLE awd_user LOGIN;
+ALTER ROLE awd_user CREATEDB;
+CREATE DATABASE awd_db OWNER awd_user;
 ALTER ROLE awd_user WITH ENCRYPTED PASSWORD '[POSTGRES_PASSWORD]';
 ```
 
