@@ -65,7 +65,10 @@ def post(request):
                     )
                     track_index = track_index + 1
 
-    context = {
-        "data": serializer.data,
-    }
+            context = {
+                "data": serializer.data,
+            }
+        else:
+            context = {}
+        
     return HttpResponse(template.render(context, request))
