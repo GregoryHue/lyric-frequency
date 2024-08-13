@@ -2,6 +2,9 @@
 
 # Album Word Disparity
 
+<p align="center">
+  <img src="https://github.com/GregoryHue/album-word-disparity/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Album Word Disparity Screenshot"/>
+</p>
 
 ## Project setup
 
@@ -52,6 +55,13 @@ Start the server with:
 source env/bin/activate
 cd main/
 python manage.py runserver
+```
+
+To update CSS change, in a second terminal:
+
+```
+source env/bin/activate
+cd main/
 python manage.py tailwind start
 ```
 
