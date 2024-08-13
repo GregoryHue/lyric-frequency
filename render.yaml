@@ -1,7 +1,7 @@
 databases:
   - name: awd_db
     plan: free
-    databaseName: postgres
+    databaseName: awd_db
     user: awd_user
 
 services:
