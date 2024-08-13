@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
-from main.django.views import get, post, error
+from main.django.views import get, post
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
@@ -36,6 +36,3 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-handler404 = error.error
-handler500 = error.error
