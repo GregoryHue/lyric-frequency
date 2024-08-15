@@ -8,41 +8,25 @@
 
 ## Project setup
 
+Create a .env file at the root of the project and complete it:
+
+```bash
+touch .env
+```
+
+```bash
+SECRET_KEY=[A DJANGO SECRET KEY]
+ENV=[dev OR prod]
+```
+
 Set up the project with:
 
-```
+```bash
 virtualenv --python="/usr/bin/python3" env 
 source env/bin/activate
 cd main/
 pip install -r requirements.txt
 python manage.py tailwind install
-```
-
-Set up the database with:
-
-```
-sudo apt install postgresql
-sudo -i -u postgres
-```
-
-Get into the SQL command prompt:
-
-```
-psql
-```
-
-Create our user:
-
-```
-CREATE ROLE awd_user LOGIN;
-ALTER ROLE awd_user CREATEDB;
-CREATE DATABASE awd_db OWNER awd_user;
-ALTER ROLE awd_user WITH ENCRYPTED PASSWORD '[POSTGRES_PASSWORD]';
-```
-
-*Note: the POSTGRES_PASSWORD needs to be set in a .env file, at the root of the project*
-
-```
 python manage.py makemigrations django
 python manage.py migrate
 ```
@@ -51,7 +35,7 @@ python manage.py migrate
 
 Start the server with:
 
-```
+```bash
 source env/bin/activate
 cd main/
 python manage.py runserver
@@ -59,7 +43,7 @@ python manage.py runserver
 
 To update CSS change, in a second terminal:
 
-```
+```bash
 source env/bin/activate
 cd main/
 python manage.py tailwind start
@@ -67,7 +51,7 @@ python manage.py tailwind start
 
 Or just start a crawl with:
 
-```
+```bash
 cd main/
 source env/bin/activate
 python manage.py crawl -S "[artist_name]" -A "[album_name]"
