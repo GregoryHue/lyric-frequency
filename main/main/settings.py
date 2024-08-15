@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.getenv("ENV") == "prod" else True
+DEBUG = False if os.getenv("DJANGO_ENV") == "prod" else True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
@@ -58,6 +58,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -138,7 +139,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "main/web/static_src/src/",
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = None
+if os.getenv("DJANGO_ENV") == "prod":
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -150,3 +153,5 @@ INTERNAL_IPS = [
 ]
 
 TAILWIND_APP_NAME = "main.web"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
