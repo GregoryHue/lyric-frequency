@@ -55,19 +55,18 @@ Or just start a crawl with:
 python manage.py crawl -S "[artist_name]" -A "[album_name]"
 ```
 
-### Production
+### Docker
 
-Set `DJANGO_ENV=prod` in the `.env` file. Then build the CSS:
+To start your first container:
 
 ```bash
-python manage.py tailwind build
-python manage.py collectstatic --no-input
+docker build -t awd . && docker run --name awd -itd -p 8080:80 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
 ```
 
-Start the service with:
+To restart it:
 
 ```bash
-gunicorn main.wsgi -b 0.0.0.0:8000
+docker stop awd && docker remove awd && docker build -t awd . && docker run --name awd -itd -p 8080:80 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
 ```
 
 ## Versions
