@@ -60,18 +60,19 @@ python manage.py crawl -S "[artist_name]" -A "[album_name]"
 To start your first container:
 
 ```bash
-docker build -t awd . && docker run --name awd -itd -p 8080:80 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
+docker build -t awd . && docker run --name awd -itd -p 80:8000 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
 ```
 
 To restart it:
 
 ```bash
-docker stop awd && docker remove awd && docker build -t awd . && docker run --name awd -itd -p 8080:80 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
+docker stop awd && docker remove awd && docker build -t awd . && docker run --name awd -itd -p 80:8000 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
 ```
 
 ## Versions
 
 - Python 3.10.12
+- Node 20.12.2
 - Scrapy 2.11.2
 - Plotly 5.23.0
 
