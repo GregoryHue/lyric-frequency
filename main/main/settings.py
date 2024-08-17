@@ -35,6 +35,8 @@ DEBUG = False if os.getenv("DJANGO_ENV") == "prod" else True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "album-word-disparity.onrender.com"]
 
+CSRF_TRUSTED_ORIGINS=["127.0.0.1", "localhost", "album-word-disparity.onrender.com"]
+
 # Application definition
 
 INSTALLED_APPS = [
