@@ -10,9 +10,10 @@ Album Word Disparity is a web-application that lets you search for an album and 
 
 ## Project setup
 
-Create a .env file at the root of the project and complete it:
+Create a .env file and complete it:
 
 ```bash
+cd main/
 touch .env
 ```
 
@@ -35,38 +36,26 @@ python manage.py migrate
 
 ## Usage
 
-### Dev
+### For local dev
 
-Set `DJANGO_ENV=dev` in the `.env` file. Then start the server with:
-
-```bash
-python manage.py runserver
-```
-
-To update CSS change, in a second terminal:
+Set `DJANGO_ENV=dev` in the `.env` file. Then, in a first terminal, start tailwind to update any CSS change:
 
 ```bash
 python manage.py tailwind start
 ```
 
-Or just start a crawl with:
+In a second terminal, start the server:
 
 ```bash
-python manage.py crawl -S "[artist_name]" -A "[album_name]"
+python manage.py runserver
 ```
 
-### Docker
+### For a Docker container
 
-To start your first container:
-
-```bash
-docker build -t awd . && docker run --name awd -itd -p 80:8000 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
-```
-
-To restart it:
+Set `DJANGO_ENV=prod` in the `.env` file. Then, start your first container:
 
 ```bash
-docker stop awd && docker remove awd && docker build -t awd . && docker run --name awd -itd -p 80:8000 awd -e "DJANGO_ENV=prod" -e "DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]"
+docker build -t awd . && docker run --name awd -itd -p 80:8000 awd
 ```
 
 ## Versions
