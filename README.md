@@ -4,7 +4,9 @@
 
 Album Word Disparity is a web-application that lets you search for an album and displays the occurrence of each word in the album.
 
-<p align="center">
+[Deployed demo](https://album-word-disparity.onrender.com/)
+
+<p align="center" style="padding-top: 12px;">
   <img src="https://github.com/GregoryHue/album-word-disparity/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Album Word Disparity Screenshot"/>
 </p>
 
