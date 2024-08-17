@@ -93,3 +93,7 @@ README.md
 - [Plotly Open Source Graphing Library for Python](https://plotly.com/python/)
 - [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/)
 - [Stack Overflow - Scrapy 'ReactorNotRestartable' error](https://stackoverflow.com/questions/45137458/scrapy-twisted-internet-error-reactornotrestartable-error-after-first-run)
+- [Docker](https://www.docker.com/)
+- [Render](https://render.com/)
+- [Docker on Render](https://docs.render.com/docker)
+- [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
