@@ -10,10 +10,9 @@ Album Word Disparity is a web-application that lets you search for an album and 
 
 ## Project setup
 
-Create a .env file and complete it:
+Create a .env file at the root of the project and complete it:
 
 ```bash
-cd main/
 touch .env
 ```
 
@@ -73,7 +72,9 @@ main/
     django/     -- backend 
     scraper/    -- crawl data from Genius
     web/        -- frontend 
+.dockerignore
 .gitignore
+Dockerfile
 LICENSE
 README.md
 ```

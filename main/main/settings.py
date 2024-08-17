@@ -12,14 +12,17 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+from os.path import join
 import os
 
 
-load_dotenv()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this: BASE_DIR / 'su
+# bdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv_path = join(BASE_DIR.parent, ".env")
+print(dotenv_path)
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
