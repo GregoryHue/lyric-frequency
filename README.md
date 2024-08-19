@@ -12,15 +12,6 @@ Lyric Frequency is a web-application that lets you search for an album and displ
   <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
 </p>
 
-## Project setup
-
-
-
-Set up the project with:
-
-```bash
-```
-
 ## Setup for dev
 
 Create a `.env` file at the root of the project and complete it:
@@ -76,7 +67,7 @@ DJANGO_ENV=prod
 Then, start your first container:
 
 ```bash
-docker build -t awd . && docker run --name awd -itd -p 80:8000 awd
+docker build -t lf . && docker run --name lf -itd -p 80:8000 lf
 ```
 
 Go to [http://localhost](http://localhost).
