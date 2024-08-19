@@ -1,15 +1,15 @@
 
 
-# Album Word Disparity
+# Lyric Frequency
 
-Album Word Disparity is a web-application that lets you search for an album and displays the occurrence of each word in the album.
+Lyric Frequency is a web-application that lets you search for an album and displays the occurrence of each word in the album.
 
-[https://album-word-disparity.onrender.com/](https://album-word-disparity.onrender.com/)
+[https://lyric-frequency.onrender.com/](https://lyric-frequency.onrender.com/)
 
 *Note: If you come across an error 502, it is because of a lack of memory. The best way to test this project is locally with Docker.*
 
 <p align="center" style="padding-top: 12px;">
-  <img src="https://github.com/GregoryHue/album-word-disparity/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Album Word Disparity Screenshot"/>
+  <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
 </p>
 
 ## Project setup

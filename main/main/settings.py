@@ -33,9 +33,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv("DJANGO_ENV") == "prod" else True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "album-word-disparity.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "lyric-frequency.onrender.com"]
 
-CSRF_TRUSTED_ORIGINS=["https://album-word-disparity.onrender.com"]
+CSRF_TRUSTED_ORIGINS=["https://lyric-frequency.onrender.com"]
 
 # Application definition
 
