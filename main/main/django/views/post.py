@@ -26,9 +26,7 @@ def post(request):
             album_name = request.POST["album"]
 
             # Crawling for data if it isn't already stored
-            if not Album.objects.filter(
-                album_name=album_name, artist_name=artist_name
-            ).exists():
+            if True:
                 crawler_settings = Settings()
                 crawler_settings.setmodule(scrapy_settings)
                 process = Process(
@@ -36,6 +34,7 @@ def post(request):
                 )
                 process.start()
                 process.join()
+                process.close()
 
             album = Album.objects.get(album_name=album_name, artist_name=artist_name)
             serializer = AlbumSerializer(album)
@@ -83,6 +82,7 @@ def post(request):
             context = {
                 "data": serializer.data,
             }
+
         else:
             context = {}
 
