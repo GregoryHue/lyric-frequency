@@ -14,15 +14,22 @@
 <body class="bg-slate-900 font-sans leading-normal tracking-normal">
 	
 	<div class="h-screen w-full p-8 overflow-scroll">
-		<div class="sticky z-50 top-8 mr-8 float-right">
+		<div class="sticky z-50 top-4 mr-4 float-right">
 			<a href="../get/" class="cursor-pointer bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 text-white py-2 px-4 border border-blue-600 rounded-lg">
 				Try another album
 			</a>
 		</div>
-		<h3 class="text-white text-4xl mb-2">{{data.album_name}}</h3>
-		<img class="w-40 h-40 mb-2" src="{{data.album_image_url}}"/>
-		<h3 class="text-white text-2xl mb-2">{{data.artist_name}}</h3>
-
+		
+		<div class="flex-row flex">
+			<div class="">
+				<img class="min-w-80 h-80 mb-2 outline outline-gray-500 outline-2" src="{{data.album_image_url}}"/>
+			</div>
+			<div class="ml-4 mt-12">
+				<h3 class="text-white text-4xl mb-2">{{data.album_name}}</h3>
+				<h3 class="text-white text-2xl mb-2">{{data.artist_name}}</h3>
+			</div>
+		</div>
+		
 		
 		<div class="mx-auto rounded-3xl p-2 my-8 shadow border bg-gray-800 border-gray-700">
 		{% for track in data.tracks %}

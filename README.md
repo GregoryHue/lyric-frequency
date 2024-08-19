@@ -6,24 +6,36 @@ Album Word Disparity is a web-application that lets you search for an album and 
 
 [https://album-word-disparity.onrender.com/](https://album-word-disparity.onrender.com/)
 
+*Note: If you come across an error 502, it is because of a lack of memory. The best way to test this project is locally with Docker.*
+
 <p align="center" style="padding-top: 12px;">
   <img src="https://github.com/GregoryHue/album-word-disparity/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Album Word Disparity Screenshot"/>
 </p>
 
 ## Project setup
 
-Create a .env file at the root of the project and complete it:
+
+
+Set up the project with:
+
+```bash
+```
+
+## Setup for dev
+
+Create a `.env` file at the root of the project and complete it:
 
 ```bash
 touch .env
+nano .env
 ```
 
 ```bash
 DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
-DJANGO_ENV=[dev OR prod]
+DJANGO_ENV=dev
 ```
 
-Set up the project with:
+Setup the project:
 
 ```bash
 virtualenv --python="/usr/bin/python3" env 
@@ -35,11 +47,7 @@ python manage.py makemigrations django
 python manage.py migrate
 ```
 
-## Usage
-
-### For local dev
-
-Set `DJANGO_ENV=dev` in the `.env` file. Then, in a first terminal, start tailwind to update any CSS change:
+Then, in a first terminal, start tailwind to update any CSS change:
 
 ```bash
 python manage.py tailwind start
@@ -51,13 +59,27 @@ In a second terminal, start the server:
 python manage.py runserver
 ```
 
-### For a Docker container
+## Setup for Docker
 
-Set `DJANGO_ENV=prod` in the `.env` file. Then, start your first container:
+Create a `.env` file at the root of the project and complete it:
+
+```bash
+touch .env
+nano .env
+```
+
+```bash
+DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
+DJANGO_ENV=prod
+```
+
+Then, start your first container:
 
 ```bash
 docker build -t awd . && docker run --name awd -itd -p 80:8000 awd
 ```
+
+Go to [http://localhost](http://localhost).
 
 ## Versions
 

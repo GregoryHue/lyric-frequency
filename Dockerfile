@@ -27,4 +27,4 @@ RUN python manage.py collectstatic --no-input
 RUN python manage.py makemigrations django
 RUN python manage.py migrate
 
-CMD ["gunicorn", "main.wsgi", "-b", "0.0.0.0:8000"]
+CMD ["gunicorn", "main.wsgi", "-b", "0.0.0.0:8000", "--max-requests", "1"]
