@@ -27,4 +27,4 @@ RUN python manage.py collectstatic --no-input
 RUN python manage.py makemigrations django
 RUN python manage.py migrate
 
-CMD ["gunicorn", "main.wsgi", "-b", "0.0.0.0:8000", "--max-requests", "1", "--access-logfile", "./gunicorn-logs.txt"]
+CMD ["gunicorn", "main.wsgi", "-b", "0.0.0.0:8000", "--access-logfile", "./gunicorn-logs.txt"]
