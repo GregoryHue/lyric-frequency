@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand
+"""from django.core.management.base import BaseCommand
 from scrapy.crawler import CrawlerProcess
 from scrapy.settings import Settings
 from main.scraper.scraper import settings as my_settings
@@ -33,3 +33,4 @@ class Command(BaseCommand):
             process.join()
         else:
             raise Exception("Enter a valid artist name and album name.")
+"""

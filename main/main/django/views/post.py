@@ -3,9 +3,18 @@ from django.http import HttpResponse
 from django.template import loader
 from main.django.models import Album
 from main.django.serializers import AlbumSerializer
-from django.core.management import call_command
-
+from scrapy.crawler import CrawlerProcess
+from main.scraper.scraper import settings as scrapy_settings
+from main.scraper.scraper.spiders.album import AlbumSpider
+from scrapy.settings import Settings
+from multiprocessing.context import Process
 from main.django.utils import make_graph
+
+
+def crawl(crawler_settings, artist_name, album_name):
+    process = CrawlerProcess(settings=crawler_settings)
+    process.crawl(AlbumSpider, artist_name=artist_name, album_name=album_name)
+    process.start(install_signal_handlers=False)
 
 
 def post(request):
@@ -20,7 +29,13 @@ def post(request):
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
-                call_command("crawl", artist_name=artist_name, album_name=album_name)
+                crawler_settings = Settings()
+                crawler_settings.setmodule(scrapy_settings)
+                process = Process(
+                    target=crawl, args=(crawler_settings, artist_name, album_name)
+                )
+                process.start()
+                process.join()
 
             album = Album.objects.get(album_name=album_name, artist_name=artist_name)
             serializer = AlbumSerializer(album)
@@ -70,5 +85,5 @@ def post(request):
             }
         else:
             context = {}
-        
+
     return HttpResponse(template.render(context, request))
