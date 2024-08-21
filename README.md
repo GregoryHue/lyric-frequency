@@ -12,7 +12,7 @@ Lyric Frequency is a web-application that lets you search for an album and displ
   <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
 </p>
 
-## Setup for dev
+## Setup for local dev
 
 Create a `.env` file at the root of the project and complete it:
 

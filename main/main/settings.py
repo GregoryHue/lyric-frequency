@@ -28,10 +28,10 @@ load_dotenv(dotenv_path)
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.getenv("DJANGO_ENV") == "prod" else True
+DEBUG = False if os.environ.get("DJANGO_ENV") == "prod" else True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "lyric-frequency.onrender.com"]
 
@@ -145,7 +145,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = None
-if os.getenv("DJANGO_ENV") == "prod":
+if os.environ.get('DJANGO_ENV') == "prod":
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
