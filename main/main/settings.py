@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "main/web/static_src/src/",
 ]
 
-print("DJANGO_ENV")
+print(os.environ.get('DJANGO_ENV'))
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
