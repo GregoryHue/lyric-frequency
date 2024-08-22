@@ -16,6 +16,8 @@ FROM python:3.10-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+EXPOSE 80
+
 WORKDIR /usr/src/app
 
 COPY --from=0 /usr/src/app .
