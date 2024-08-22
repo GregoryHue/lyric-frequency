@@ -67,7 +67,8 @@ DJANGO_ENV=prod
 Then, start your first container:
 
 ```bash
-docker build -t lf . && docker run --name lf -itd -p 80:8000 lf
+docker build -t lf .
+docker run --name lf -itd -p 80:8000 lf
 ```
 
 Go to [http://localhost](http://localhost).
