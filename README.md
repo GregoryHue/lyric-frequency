@@ -24,6 +24,7 @@ nano .env
 ```bash
 DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
 DJANGO_ENV=dev
+DJANGO_ALLOWED_HOSTS=""
 ```
 
 Setup the project:
@@ -62,6 +63,7 @@ nano .env
 ```bash
 DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
 DJANGO_ENV=prod
+DJANGO_ALLOWED_HOSTS=""
 ```
 
 Then, start your first container:
