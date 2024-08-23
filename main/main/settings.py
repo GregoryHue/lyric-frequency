@@ -27,6 +27,9 @@ load_dotenv(dotenv_path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+print(os.environ.get('DJANGO_ENV'))
+print(os.environ.get('DJANGO_SECRET_KEY'))
+print(os.environ.get('DJANGO_ALLOWED_HOSTS'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
@@ -143,8 +146,6 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "main/web/static_src/src/",
 ]
-
-print(os.environ.get('DJANGO_ENV'))
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
