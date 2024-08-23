@@ -12,14 +12,12 @@ def fetch_track(request, album_id, track_id):
 
     if len(serializer.data["lyrics"]) > 0:
         # Removing special characters
-        print("Removing special characters")
         lyrics = serializer.data["lyrics"]
         lyrics = re.sub(r"[^a-zA-Z0-9 \'\-]", "", lyrics)
         lyrics = re.sub(r"[\-]", " ", lyrics).strip()
         each_lyrics = lyrics.split(" ")
 
         # Creating a dictionnary, later transformed into a DataFrame
-        print("Creating a dictionnary, later transformed into a DataFrame")
         for lyric in each_lyrics:
             lyric = lyric.lower()
             if lyric != "":

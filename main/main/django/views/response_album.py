@@ -20,12 +20,10 @@ def response_album(request):
     if request.method == "GET":
         if "artist" in request.GET and "album" in request.GET:
             # Reading user inputs
-            print("Reading user inputs")
             artist_name = request.GET["artist"]
             album_name = request.GET["album"]
 
             # Crawling for data if it isn't already stored
-            print("Crawling for data if it isn't already stored")
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
@@ -37,13 +35,11 @@ def response_album(request):
                 process.start()
                 process.join()
                 process.close()
-                print("close()")
 
             album = Album.objects.get(album_name=album_name, artist_name=artist_name)
             serializer = AlbumSerializer(album)
 
             # Adding an 'Overall' graph
-            # print("Adding an 'Overall' graph")
             # general_lyrics = " ".join(
             #     [track["lyrics"] for track in serializer.data["tracks"]]
             # )
@@ -57,7 +53,6 @@ def response_album(request):
             # )
 
             # Reading each tracks
-            print("Reading each tracks")
 
             # serializer.data["tracks"][track_index]["graph_data"] = lyric_occurrence
             # track_index = track_index + 1
