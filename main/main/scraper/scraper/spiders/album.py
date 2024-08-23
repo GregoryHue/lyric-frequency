@@ -13,23 +13,26 @@ class AlbumSpider(scrapy.Spider):
     def start_requests(
         self,
     ):
-        # Reading user input and removing special characters
-        artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
-        album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
-        urls = [
-            "https://genius.com/albums/"
-            + artist_name.replace(" ", "-")
-            + "/"
-            + album_name.replace(" ", "-")
-        ]
-        # Fetching lyrics from Genius.com
-        for url in urls:
-            print(url)
-            yield scrapy.Request(
-                url=url,
-                callback=self.parse_album,
-                cb_kwargs={"genius_url": url},
-            )
+        try:
+            # Reading user input and removing special characters
+            artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
+            album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
+            urls = [
+                "https://genius.com/albums/"
+                + artist_name.replace(" ", "-")
+                + "/"
+                + album_name.replace(" ", "-")
+            ]
+            # Fetching lyrics from Genius.com
+            for url in urls:
+                print(url)
+                yield scrapy.Request(
+                    url=url,
+                    callback=self.parse_album,
+                    cb_kwargs={"genius_url": url},
+                )
+        except Exception as e:
+            print("HERE", e)
 
     def parse_song(self, response, album_name):
         track_item = ItemLoader(item=TrackItem(), response=response)
