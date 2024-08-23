@@ -27,18 +27,20 @@ load_dotenv(dotenv_path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-print(os.environ.get('DJANGO_ENV'))
-print(os.environ.get('DJANGO_SECRET_KEY'))
-print(os.environ.get('DJANGO_ALLOWED_HOSTS'))
+print(os.environ.get("DJANGO_ENV"))
+print(os.environ.get("DJANGO_SECRET_KEY"))
+print(os.environ.get("DJANGO_ALLOWED_HOSTS"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.environ.get("DJANGO_ENV") == "prod" else True
 
+print(DEBUG)
+
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", os.environ.get("DJANGO_ALLOWED_HOSTS")]
 
-CSRF_TRUSTED_ORIGINS=["https://" + os.environ.get("DJANGO_ALLOWED_HOSTS", "")]
+CSRF_TRUSTED_ORIGINS = ["https://" + os.environ.get("DJANGO_ALLOWED_HOSTS", "")]
 
 # Application definition
 
@@ -144,7 +146,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "main/web/static_src/src/",
+    BASE_DIR / "main/web/static/",
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

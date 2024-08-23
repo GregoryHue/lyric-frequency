@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
-from main.django.views import get, post, error
+from main.django.views import query_album, response_album, error, fetch_track
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
@@ -29,13 +29,18 @@ router.register(r"albums", AlbumViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", get.get, name="get"),
-    path("get/", get.get, name="get"),
-    path("post/", post.post, name="post"),
+    path("", query_album.query_album, name="query_album"),
+    path("query_album/", query_album.query_album, name="query_album"),
+    path("response_album/", response_album.response_album, name="response_album"),
+    path("fetch_track/<int:album_id>/<int:track_id>/", fetch_track.fetch_track, name="fetch_track"),
     path("api-view/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("__reload__/", include("django_browser_reload.urls")),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] 
+
+
+if settings.DEBUG:
+    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 handler404 = error.error

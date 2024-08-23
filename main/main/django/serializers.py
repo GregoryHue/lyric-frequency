@@ -6,7 +6,7 @@ from main.django.models import Album, Track
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ["track_name", "lyrics", "album"]
+        fields = ["id", "track_name", "lyrics", "album"]
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -15,6 +15,7 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = [
+            "id",
             "album_name",
             "artist_name",
             "album_image_url",
