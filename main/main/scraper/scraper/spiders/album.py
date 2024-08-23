@@ -13,26 +13,23 @@ class AlbumSpider(scrapy.Spider):
     def start_requests(
         self,
     ):
-        try:
-            # Reading user input and removing special characters
-            artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
-            album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
-            urls = [
-                "https://genius.com/albums/"
-                + artist_name.replace(" ", "-")
-                + "/"
-                + album_name.replace(" ", "-")
-            ]
-            # Fetching lyrics from Genius.com
-            for url in urls:
-                print(url)
-                yield scrapy.Request(
-                    url=url,
-                    callback=self.parse_album,
-                    cb_kwargs={"genius_url": url},
-                )
-        except Exception as e:
-            print("HERE", e)
+        # Reading user input and removing special characters
+        artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
+        album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
+        urls = [
+            "https://genius.com/albums/"
+            + artist_name.replace(" ", "-")
+            + "/"
+            + album_name.replace(" ", "-")
+        ]
+        # Fetching lyrics from Genius.com
+        for url in urls:
+            print(url)
+            yield scrapy.Request(
+                url=url,
+                callback=self.parse_album,
+                cb_kwargs={"genius_url": url},
+            )
 
     def parse_song(self, response, album_name):
         track_item = ItemLoader(item=TrackItem(), response=response)
@@ -54,29 +51,33 @@ class AlbumSpider(scrapy.Spider):
         yield track_item.load_item()
 
     def parse_album(self, response, genius_url):
-        album_item = ItemLoader(item=AlbumItem(), response=response)
-        album_item.default_output_processor = TakeFirst()
-        album_item.add_value("genius_url", genius_url)
-        album_image = response.xpath(
-            '//div[@class="header_with_cover_art-inner column_layout"]//img/@src'
-        ).extract_first()
-        album_item.add_value("album_image_url", album_image)
-        artist_name = response.xpath(
-            '//div[@class="header_with_cover_art-primary_info"]//h2//a//text()'
-        ).get()
-        album_item.add_value("artist_name", artist_name)
-        print(artist_name)
-        album_name = response.xpath(
-            '//h1[@class="header_with_cover_art-primary_info-title header_with_cover_art-primary_info-title--white"]//text()'
-        ).get()
-        album_item.add_value("album_name", album_name)
-        print(album_name)
-        yield album_item.load_item()
-        for track in response.xpath(
-            '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a/@href'
-        ).extract():
-            yield scrapy.Request(
-                url=track,
-                callback=self.parse_song,
-                cb_kwargs={"album_name": album_name},
-            )
+        try:
+            album_item = ItemLoader(item=AlbumItem(), response=response)
+            album_item.default_output_processor = TakeFirst()
+            album_item.add_value("genius_url", genius_url)
+            album_image = response.xpath(
+                '//div[@class="header_with_cover_art-inner column_layout"]//img/@src'
+            ).extract_first()
+            album_item.add_value("album_image_url", album_image)
+            artist_name = response.xpath(
+                '//div[@class="header_with_cover_art-primary_info"]//h2//a//text()'
+            ).get()
+            album_item.add_value("artist_name", artist_name)
+            print(artist_name)
+            album_name = response.xpath(
+                '//h1[@class="header_with_cover_art-primary_info-title header_with_cover_art-primary_info-title--white"]//text()'
+            ).get()
+            album_item.add_value("album_name", album_name)
+            print(album_name)
+            yield album_item.load_item()
+            for track in response.xpath(
+                '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a/@href'
+            ).extract():
+                yield scrapy.Request(
+                    url=track,
+                    callback=self.parse_song,
+                    cb_kwargs={"album_name": album_name},
+                )
+
+        except Exception as e:
+            print("HERE", e)
