@@ -1,10 +1,10 @@
 data.json
-#.env
+.env
 db.sqlite3
 env/
 .ruff_cache/
 staticfiles/
-static/
+dist/
 media/
 __pycache__/
 .git/
