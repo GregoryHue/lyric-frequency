@@ -1,0 +1,22 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Lyric Frequency</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src='https://cdn.plot.ly/plotly-2.34.0.min.js'></script>
+	<script src="https://unpkg.com/htmx.org@2.0.2"></script>
+	<script src="{% static 'make_graph.js' %}"></script>
+	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+	{% tailwind_css %}
+</head>
+
+<body class="bg-slate-900 font-sans leading-normal tracking-normal" >
+        {% block content %}
+        {% endblock %}
+</body>
+
+</html>

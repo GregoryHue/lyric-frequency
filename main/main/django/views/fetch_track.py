@@ -27,7 +27,6 @@ def fetch_track(request, album_id, track_id):
                     lyric_occurrence[lyric] = lyric_occurrence[lyric] + 1
                 else:
                     lyric_occurrence[lyric] = 1
-        print(json.dumps(lyric_occurrence))
         return HttpResponse(json.dumps(lyric_occurrence), request)
     
-    return HttpResponse("<div class=\"text-white ml-12 text-xl\">No lyrics for: " + serializer.data["track_name"] + "</div>", request)
+    return HttpResponse({}, request)

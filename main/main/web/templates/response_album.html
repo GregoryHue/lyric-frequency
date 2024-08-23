@@ -1,20 +1,6 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-	<title>Lyric Frequency</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
-	<script src='https://cdn.plot.ly/plotly-2.34.0.min.js'></script>
-	<script src="https://unpkg.com/htmx.org@2.0.2"></script>
-	<script src="{% static 'make_graph.js' %}"></script>
-	{% tailwind_css %}
-</head>
-
-<body class="bg-slate-900 font-sans leading-normal tracking-normal" >
+{% block content %}
 	
 	<div class="h-screen w-full p-8 overflow-scroll">
 		<div class="sticky z-50 top-4 mr-4 float-right">
@@ -36,7 +22,7 @@
 		
 		<div class="mx-auto rounded-3xl p-2 my-8 shadow border bg-gray-800 border-gray-700" id="graph_target">
 		{% for track in data.tracks %}
-			<div class="p-2" hx-get="/fetch_track/{{track.album}}/{{track.id}}/" hx-trigger="load" hx-on::after-request="make_graph(event.detail.elt.innerText)">
+			<div class="p-2 min-h-96 text-black text-opacity-0" id={{track.id}} hx-get="/fetch_track/{{track.album}}/{{track.id}}/" hx-trigger="load" hx-on::after-request="make_graph(event.detail.elt.innerText, '{{track.track_name}}', event.detail.elt.id)">
 				
 			</div>
 			{% if not forloop.last %}
@@ -50,6 +36,4 @@
 			<a class="text-gray-300 text-base" href="{{data.genius_url}}"><u>{{data.genius_url}}</u></a>
 		</div>
 	</div>
-</body>
-
-</html>
+{% endblock %}

@@ -26,7 +26,9 @@ def response_album(request):
 
             # Crawling for data if it isn't already stored
             print("Crawling for data if it isn't already stored")
-            if False:
+            if not Album.objects.filter(
+                album_name=album_name, artist_name=artist_name
+            ).exists():
                 crawler_settings = Settings()
                 crawler_settings.setmodule(scrapy_settings)
                 process = Process(
@@ -39,7 +41,6 @@ def response_album(request):
 
             album = Album.objects.get(album_name=album_name, artist_name=artist_name)
             serializer = AlbumSerializer(album)
-            track_index = 0
 
             # Adding an 'Overall' graph
             # print("Adding an 'Overall' graph")
@@ -57,10 +58,9 @@ def response_album(request):
 
             # Reading each tracks
             print("Reading each tracks")
-            
 
-                # serializer.data["tracks"][track_index]["graph_data"] = lyric_occurrence
-                # track_index = track_index + 1
+            # serializer.data["tracks"][track_index]["graph_data"] = lyric_occurrence
+            # track_index = track_index + 1
 
             context = {
                 "data": serializer.data,
@@ -70,4 +70,3 @@ def response_album(request):
 
     print("HttpResponse(template.render(context, request))")
     return HttpResponse(template.render(context, request))
-

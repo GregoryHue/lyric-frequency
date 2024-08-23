@@ -1,17 +1,6 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-	<title>Lyric Frequency</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="shortcut icon" type="image/png" href="/static/favicon.png"/>
-	{% tailwind_css %}
-</head>
-
-<body class="bg-slate-900 font-sans leading-normal tracking-normal">
+{% block content %}
 	<div class="w-full">
 		<div class="w-96 mx-auto mt-20 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
 				<div class="grid grid-flow-row gap-y-3">
@@ -25,6 +14,4 @@
             </div>
 		</div>
 	</div>
-</body>
-
-</html>
+{% endblock %}
