@@ -47,6 +47,7 @@ class AlbumSpider(scrapy.Spider):
         # Ignoring lines such as: [Verse 1]
         lyrics = re.sub(r"\[.*?\]", "", lyrics)
         track_item.add_value("lyrics", lyrics)
+        print(track_name)
         yield track_item.load_item()
 
     def parse_album(self, response, genius_url):
@@ -61,10 +62,12 @@ class AlbumSpider(scrapy.Spider):
             '//div[@class="header_with_cover_art-primary_info"]//h2//a//text()'
         ).get()
         album_item.add_value("artist_name", artist_name)
+        print(artist_name)
         album_name = response.xpath(
             '//h1[@class="header_with_cover_art-primary_info-title header_with_cover_art-primary_info-title--white"]//text()'
         ).get()
         album_item.add_value("album_name", album_name)
+        print(album_name)
         yield album_item.load_item()
         for track in response.xpath(
             '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a/@href'

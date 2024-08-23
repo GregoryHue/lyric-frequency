@@ -24,10 +24,13 @@ def post(request):
         if request.method == "POST":
             if "artist" in request.POST and "album" in request.POST:
                 # Reading user inputs
+                print("Reading user inputs")
                 artist_name = request.POST["artist"]
                 album_name = request.POST["album"]
+                
 
                 # Crawling for data if it isn't already stored
+                print("Crawling for data if it isn't already stored")
                 if True:
                     crawler_settings = Settings()
                     crawler_settings.setmodule(scrapy_settings)
@@ -37,12 +40,14 @@ def post(request):
                     process.start()
                     process.join()
                     process.close()
+                    print("close()")
 
                 album = Album.objects.get(album_name=album_name, artist_name=artist_name)
                 serializer = AlbumSerializer(album)
                 track_index = 0
 
-                # Adding a 'Overall' graph
+                # Adding an 'Overall' graph
+                print("Adding an 'Overall' graph")
                 general_lyrics = " ".join(
                     [track["lyrics"] for track in serializer.data["tracks"]]
                 )
@@ -56,16 +61,19 @@ def post(request):
                 )
 
                 # Reading each tracks
+                print("Reading each tracks")
                 for track in serializer.data["tracks"]:
                     lyric_occurrence = {}
 
                     # Removing special characters
+                    print("Removing special characters")
                     lyrics = track["lyrics"]
                     lyrics = re.sub(r"[^a-zA-Z0-9 \'\-]", "", lyrics)
                     lyrics = re.sub(r"[\-]", " ", lyrics).strip()
                     each_lyrics = lyrics.split(" ")
 
                     # Creating a dictionnary, later transformed into a DataFrame
+                    print("Creating a dictionnary, later transformed into a DataFrame")
                     for lyric in each_lyrics:
                         lyric = lyric.lower()
                         if lyric != "":
@@ -75,6 +83,7 @@ def post(request):
                                 lyric_occurrence[lyric] = 1
 
                     # Generating a graph
+                    print("Generating a graph")
                     if lyric_occurrence != {}:
                         serializer.data["tracks"][track_index]["graph"] = make_graph(
                             lyric_occurrence, track
@@ -88,6 +97,7 @@ def post(request):
             else:
                 context = {}
 
+        print("HttpResponse(template.render(context, request))")
         return HttpResponse(template.render(context, request))
     except AlreadyNegotiating as e:
         print(e)
