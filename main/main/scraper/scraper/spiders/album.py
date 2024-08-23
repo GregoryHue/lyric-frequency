@@ -32,7 +32,7 @@ class AlbumSpider(scrapy.Spider):
             )
 
     def parse_song(self, response, album_name):
-        track_item = ItemLoader(item=TrackItem(), response=response)
+        track_item = ItemLoader(item=TrackItem())
         track_item.default_output_processor = TakeFirst()
         track_name = response.xpath(
             '//span[@class="SongHeaderdesktop__HiddenMask-sc-1effuo1-11 iMpFIj"]//text()'
@@ -52,7 +52,7 @@ class AlbumSpider(scrapy.Spider):
 
     def parse_album(self, response, genius_url):
         try:
-            album_item = ItemLoader(item=AlbumItem(), response=response)
+            album_item = ItemLoader(item=AlbumItem())
             album_item.default_output_processor = TakeFirst()
             album_item.add_value("genius_url", genius_url)
             album_image = response.xpath(
