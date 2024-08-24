@@ -6,10 +6,8 @@ Lyric Frequency is a web-application that lets you search for an album and displ
 
 [https://lyric-frequency-edsapofefq-od.a.run.app/](https://lyric-frequency-edsapofefq-od.a.run.app/)
 
-*Note: If you come across an error 502, it is because of a lack of memory. The best way to test this project is locally with Docker.*
-
 <p align="center" style="padding-top: 12px;">
-  <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static_src/src/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
+  <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
 </p>
 
 ## Setup for local dev
@@ -73,7 +71,7 @@ docker build -t lf .
 docker run --name lf -itd -p 80:8000 lf
 ```
 
-Go to [http://localhost](http://localhost).
+Go to [http://localhost](http://localhost)
 
 ## Versions
 
@@ -106,6 +104,7 @@ README.md
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Scrapy](https://scrapy.org/)
 - [scrapy-djangoitem](https://pypi.org/project/scrapy-djangoitem/)
+- [HTMX - high power tools for HTML](https://htmx.org/)
 - [Plotly Open Source Graphing Library for Python](https://plotly.com/python/)
 - [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/)
 - [Stack Overflow - Scrapy 'ReactorNotRestartable' error](https://stackoverflow.com/questions/45137458/scrapy-twisted-internet-error-reactornotrestartable-error-after-first-run)

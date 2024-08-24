@@ -23,8 +23,10 @@ class Track(models.Model):
     track_name = models.CharField(max_length=255, null=False)
     lyrics = models.TextField(null=False)
     album = models.ForeignKey(Album, related_name="tracks", on_delete=models.CASCADE)
+    track_order = models.IntegerField(null=False)
 
     class Meta:
+        ordering = ["track_order"]
         unique_together = (
             "track_name",
             "album",

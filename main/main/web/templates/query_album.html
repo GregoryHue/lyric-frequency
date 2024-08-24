@@ -23,13 +23,19 @@
 		<div class="min-h-64 mt-20 rounded-3xl mr-auto ml-2 p-6 shadow border bg-gray-800 border-gray-700">
 			<h3 class="text-white mb-4">Latest albums fetched:</h3>
 			{% for track in data %}
-				<a class="flex hover:bg-slate-900 p-2 rounded cursor-pointer" href="/response_album/?artist={{track.artist_name|encode_string}}&album={{track.album_name|encode_string}}">
-				<img class="min-w-20 h-20 mb-2 outline outline-gray-500 outline-2" src="{{track.album_image_url}}"/>
+				<a class="flex hover:bg-slate-900 duration-300 p-2 rounded cursor-pointer" href="/response_album/?artist={{track.artist_name|encode_string}}&album={{track.album_name|encode_string}}">
+				<img class="min-w-20 h-20 mb-2 mt-2 outline outline-gray-500 outline-2" src="{{track.album_image_url}}"/>
 				<div class="block ml-2">
 					<h3 class="text-white text-xl">{{track.album_name}}</h3>
 					<h3 class="text-white text-base">{{track.artist_name}}</h3></div>
 				</a>
 			{% endfor %}
 		</div>
+	</div>
+	<div class="absolute bottom-4 right-4 float-right">
+		<a target="_blank" href="https://github.com/GregoryHue/lyric-frequency" class="text-gray-500 text-base hover:text-gray-50 duration-300">
+			<h3>Made with Django, Scrapy, HTMX and Plotly</h3>
+			<h3 class="float-right">by Gregory Hue</h3>
+		</a>
 	</div>
 {% endblock %}

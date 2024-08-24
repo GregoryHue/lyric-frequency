@@ -24,9 +24,10 @@ def response_album(request):
             album_name = request.GET["album"]
 
             # Crawling for data if it isn't already stored
-            if not Album.objects.filter(
-                album_name=album_name, artist_name=artist_name
-            ).exists():
+            # if not Album.objects.filter(
+            #     album_name=album_name, artist_name=artist_name
+            # ).exists():
+            if True:
                 crawler_settings = Settings()
                 crawler_settings.setmodule(scrapy_settings)
                 process = Process(
@@ -54,10 +55,11 @@ def response_album(request):
                     track_name="Overall occurrence",
                     lyrics=general_lyrics,
                     album_id=album_serializer.data["id"],
+                    track_order=0,
                 )
                 new_overall_track.save()
                 track_serializer = TrackSerializer(new_overall_track)
-                album_serializer.data["tracks"].append(track_serializer.data)
+                album_serializer.data["tracks"].insert(0, track_serializer.data)
 
             context = {
                 "data": album_serializer.data,

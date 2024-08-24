@@ -31,12 +31,13 @@ class AlbumSpider(scrapy.Spider):
                 cb_kwargs={"genius_url": url},
             )
 
-    def parse_song(self, response, album_name):
+    def parse_song(self, response, album_name, i):
         track_item = ItemLoader(item=TrackItem())
         track_item.default_output_processor = TakeFirst()
         track_name = response.xpath(
             '//span[@class="SongHeaderdesktop__HiddenMask-sc-1effuo1-11 iMpFIj"]//text()'
         ).get()
+        track_item.add_value("track_order", i)
         track_item.add_value("track_name", track_name)
         track_item.add_value("album", album_name)
         lyrics = ""
@@ -67,15 +68,15 @@ class AlbumSpider(scrapy.Spider):
             ).get()
             album_item.add_value("album_name", album_name)
             yield album_item.load_item()
+            i = 0
             for track in response.xpath(
-                '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a/@href'
+                '//div[@class="column_layout-column_span column_layout-column_span--primary"]//a[@class="u-display_block"]/@href'
             ).extract():
+                i = i + 1
                 yield scrapy.Request(
                     url=track,
                     callback=self.parse_song,
-                    cb_kwargs={
-                        "album_name": album_name,
-                    },
+                    cb_kwargs={"album_name": album_name, "i": i},
                 )
 
         except Exception as e:
