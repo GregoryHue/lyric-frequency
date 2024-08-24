@@ -12,6 +12,7 @@ from main.django.models import Album, Track
 
 
 class ScraperPipeline(object):
+
     @sync_to_async
     def process_item(self, item, spider):
         if item.django_model == Album:
@@ -27,3 +28,4 @@ class ScraperPipeline(object):
             except IntegrityError:
                 pass
         return item
+        

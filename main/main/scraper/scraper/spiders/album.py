@@ -73,7 +73,9 @@ class AlbumSpider(scrapy.Spider):
                 yield scrapy.Request(
                     url=track,
                     callback=self.parse_song,
-                    cb_kwargs={"album_name": album_name},
+                    cb_kwargs={
+                        "album_name": album_name,
+                    },
                 )
 
         except Exception as e:
