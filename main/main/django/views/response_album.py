@@ -24,10 +24,9 @@ def response_album(request):
             album_name = request.GET["album"]
 
             # Crawling for data if it isn't already stored
-            # if not Album.objects.filter(
-            #     album_name=album_name, artist_name=artist_name
-            # ).exists():
-            if True:
+            if not Album.objects.filter(
+                album_name=album_name, artist_name=artist_name
+            ).exists():
                 crawler_settings = Settings()
                 crawler_settings.setmodule(scrapy_settings)
                 process = Process(
