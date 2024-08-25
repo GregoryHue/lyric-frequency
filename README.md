@@ -20,9 +20,10 @@ nano .env
 ```
 
 ```bash
-DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
+DJANGO_SECRET_KEY=""
 DJANGO_ENV=dev
 DJANGO_ALLOWED_HOSTS=""
+DATABASE_URL=""
 ```
 
 Setup the project:
@@ -59,9 +60,10 @@ nano .env
 ```
 
 ```bash
-DJANGO_SECRET_KEY=[A DJANGO SECRET KEY]
+DJANGO_SECRET_KEY=""
 DJANGO_ENV=prod
 DJANGO_ALLOWED_HOSTS=""
+DATABASE_URL=""
 ```
 
 Then, start your first container:
@@ -106,6 +108,7 @@ README.md
 - [scrapy-djangoitem](https://pypi.org/project/scrapy-djangoitem/)
 - [HTMX - high power tools for HTML](https://htmx.org/)
 - [Plotly Open Source Graphing Library for Python](https://plotly.com/python/)
+- [Supabase](https://supabase.com/)
 - [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/)
 - [Stack Overflow - Scrapy 'ReactorNotRestartable' error](https://stackoverflow.com/questions/45137458/scrapy-twisted-internet-error-reactornotrestartable-error-after-first-run)
 - [Docker](https://www.docker.com/)

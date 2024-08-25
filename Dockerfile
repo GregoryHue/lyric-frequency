@@ -16,18 +16,19 @@ FROM python:3.10-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+RUN pip install --upgrade pip
+
 EXPOSE 8000
 
 WORKDIR /usr/src/app
+
+COPY --from=0 /usr/src/app/main/requirements.txt .
+RUN pip install -r requirements.txt
 
 COPY --from=0 /usr/src/app .
 
 WORKDIR /usr/src/app/main
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
 RUN python manage.py collectstatic --no-input
-RUN python manage.py makemigrations django
-RUN python manage.py migrate
 
 CMD ["gunicorn", "main.wsgi", "-b", "0.0.0.0:8000", "--workers", "1", "--threads", "2", "--timeout", "90", "--access-logfile", "./gunicorn-logs.txt"]
