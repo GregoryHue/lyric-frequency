@@ -63,14 +63,12 @@ nano .env
 DJANGO_SECRET_KEY=""
 DJANGO_ENV=prod
 DJANGO_ALLOWED_HOSTS=""
-DATABASE_URL=""
 ```
 
 Then, start your first container:
 
 ```bash
-docker build -t lf .
-docker run --name lf -itd -p 80:8000 lf
+docker build -t lyric-frequency . && docker run --name lyric-frequency -itd -p 80:8000 lyric-frequency
 ```
 
 Go to [http://localhost](http://localhost)
