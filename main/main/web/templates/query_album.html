@@ -3,33 +3,37 @@
 
 {% block content %}
 	<div class="w-full flex">
-		<div class="min-h-64 w-96 mt-20 rounded-3xl ml-auto mr-2 p-6 shadow border bg-gray-800 border-gray-700">
-			<form action="../response_album/" method="GET">
-				<div class="grid grid-flow-row gap-y-3">
-					<h3 class="text-white ">Artist</h3>
-					<input placeholder="Artist" name="artist"
-						class="border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-						type="text">
-					<h3 class="text-white">Album</h3>
-					<input placeholder="Album" name="album"
-						class="border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-						type="text">
-					<button type="submit"
-						class="w-1/2 text-white mt-10 focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Search</button>
+		<div class="mx-auto flex">
+			<div class="min-h-64 min-w-96 mt-20 mx-8 rounded-3xl p-6 shadow border bg-gray-800 border-gray-700">
+				<form action="../response_album/" method="GET">
+					<div class="grid grid-flow-row gap-y-3">
+						<h3 class="text-white ">Artist</h3>
+						<input placeholder="Artist" name="artist"
+							class="border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+							type="text">
+						<h3 class="text-white">Album</h3>
+						<input placeholder="Album" name="album"
+							class="border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+							type="text">
+						<button type="submit"
+							class="w-1/2 text-white mt-10 focus:ring-4 focus:outline-none rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Search</button>
 
-				</div>
-			</form>
-		</div>
-		<div class="min-h-64 mt-20 rounded-3xl mr-auto ml-2 p-6 shadow border bg-gray-800 border-gray-700">
-			<h3 class="text-white mb-4">Latest albums fetched:</h3>
-			{% for track in data %}
-				<a class="flex hover:bg-slate-900 duration-300 p-2 rounded cursor-pointer" href="/response_album/?artist={{track.artist_name|encode_string}}&album={{track.album_name|encode_string}}">
-				<img class="min-w-20 h-20 mb-2 mt-2 outline outline-gray-500 outline-2" src="{{track.album_image_url}}"/>
-				<div class="block ml-2">
-					<h3 class="text-white text-xl">{{track.album_name}}</h3>
-					<h3 class="text-white text-base">{{track.artist_name}}</h3></div>
-				</a>
-			{% endfor %}
+					</div>
+				</form>
+			</div>
+			{% if data|length > 0 %}
+			<div class="min-h-64 min-w-96 mt-20 mx-8 rounded-3xl ml-2 p-6 shadow border bg-gray-800 border-gray-700">
+				<h3 class="text-white mb-4">Latest albums fetched:</h3>
+				{% for track in data %}
+					<a class="flex hover:bg-slate-900 duration-300 p-2 rounded cursor-pointer" href="/response_album/?artist={{track.artist_name|encode_string}}&album={{track.album_name|encode_string}}">
+					<img class="min-w-20 h-20 mb-2 mt-2 outline outline-gray-500 outline-2" src="{{track.album_image_url}}"/>
+					<div class="block ml-2">
+						<h3 class="text-white text-xl">{{track.album_name}}</h3>
+						<h3 class="text-white text-base">{{track.artist_name}}</h3></div>
+					</a>
+				{% endfor %}
+			</div>
+			{% endif %}
 		</div>
 	</div>
 	<div class="absolute bottom-4 right-4 float-right">

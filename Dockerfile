@@ -1,7 +1,5 @@
 FROM node:20.16-bookworm
 
-RUN echo $DJANGO_ENV
-
 WORKDIR /usr/src/app
 
 COPY . .
