@@ -4,7 +4,9 @@
 
 Lyric Frequency is a web-application that lets you search for an album and displays the occurrence of each word in the album.
 
-[https://lyric-frequency-edsapofefq-od.a.run.app/](https://lyric-frequency-edsapofefq-od.a.run.app/)
+[https://lyric-frequency-56927045982.europe-west9.run.app](https://lyric-frequency-56927045982.europe-west9.run.app)
+
+*Please be patient, this is running on a Google Cloud VM with 512MB of RAM*
 
 <p align="center" style="padding-top: 12px;">
   <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
