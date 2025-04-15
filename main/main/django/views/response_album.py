@@ -35,34 +35,49 @@ def response_album(request):
                 process.start()
                 process.join()
                 process.close()
-
-            album = Album.objects.get(album_name=album_name, artist_name=artist_name)
-            album_serializer = AlbumSerializer(album)
-
-            #Checking for an 'Overall' lyric track
-            does_overall_exist = False
-            for track in album_serializer.data["tracks"]:
-                if track["track_name"] == "Overall occurrence":
-                    does_overall_exist = True
-
-            #Adding an 'Overall' lyric track
-            if not does_overall_exist:
-                general_lyrics = " ".join(
-                    [track["lyrics"] for track in album_serializer.data["tracks"]]
+            try:
+                album = Album.objects.get(
+                    album_name__icontains=album_name, artist_name__icontains=artist_name
                 )
-                new_overall_track = Track.objects.create(
-                    track_name="Overall occurrence",
-                    lyrics=general_lyrics,
-                    album_id=album_serializer.data["id"],
-                    track_order=0,
-                )
-                new_overall_track.save()
-                track_serializer = TrackSerializer(new_overall_track)
-                album_serializer.data["tracks"].insert(0, track_serializer.data)
+                album_serializer = AlbumSerializer(album)
 
-            context = {
-                "data": album_serializer.data,
-            }
+                # Checking for an 'Overall' lyric track
+                does_overall_exist = False
+                for track in album_serializer.data["tracks"]:
+                    if track["track_name"] == "Overall occurrence":
+                        does_overall_exist = True
+
+                # Adding an 'Overall' lyric track
+                if not does_overall_exist:
+                    general_lyrics = " ".join(
+                        [track["lyrics"] for track in album_serializer.data["tracks"]]
+                    )
+                    new_overall_track = Track.objects.create(
+                        track_name="Overall occurrence",
+                        lyrics=general_lyrics,
+                        album_id=album_serializer.data["id"],
+                        track_order=0,
+                    )
+                    new_overall_track.save()
+                    track_serializer = TrackSerializer(new_overall_track)
+                    album_serializer.data["tracks"].insert(0, track_serializer.data)
+
+                context = {
+                    "data": album_serializer.data,
+                    "error": None,
+                }
+            except Album.DoesNotExist:
+                context = {
+                    "data": None,
+                    "error": "Could not find anything. Are you sure the typed the artist's name and the album's name correctly?",
+                }
+                template = loader.get_template("../../web/templates/error.html")
+                return HttpResponse(template.render(context, request))
         else:
-            context = {}
+            context = {
+                "data": None,
+                "error": "Empty request.",
+            }
+            template = loader.get_template("../../web/templates/error.html")
+            return HttpResponse(template.render(context, request))
     return HttpResponse(template.render(context, request))

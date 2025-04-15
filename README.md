@@ -25,7 +25,6 @@ nano .env
 DJANGO_SECRET_KEY=""
 DJANGO_ENV=dev
 DJANGO_ALLOWED_HOSTS=""
-DATABASE_URL=""
 ```
 
 Setup the project:

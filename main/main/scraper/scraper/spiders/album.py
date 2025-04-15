@@ -35,14 +35,14 @@ class AlbumSpider(scrapy.Spider):
         track_item = ItemLoader(item=TrackItem())
         track_item.default_output_processor = TakeFirst()
         track_name = response.xpath(
-            '//span[@class="SongHeaderdesktop__HiddenMask-sc-1effuo1-11 iMpFIj"]//text()'
+            '//span[contains(@class, "SongHeader-desktop__HiddenMask")]//text()'
         ).get()
         track_item.add_value("track_order", i)
         track_item.add_value("track_name", track_name)
         track_item.add_value("album", album_name)
         lyrics = ""
         for lyric in response.xpath(
-            '//div[@class="Lyrics__Container-sc-1ynbvzw-1 kUgSbL"]//text()'
+            '//div[contains(@class, "Lyrics__Container")]//text()'
         ).extract():
             lyrics = lyrics + lyric.replace("\n", " ") + " "
         # Ignoring lines such as: [Verse 1]
