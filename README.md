@@ -21,8 +21,9 @@ touch .env
 nano .env
 ```
 
+
 ```bash
-DJANGO_SECRET_KEY=""
+DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=dev
 DJANGO_ALLOWED_HOSTS=""
 ```
@@ -45,7 +46,7 @@ Then, in a first terminal, start tailwind to update any CSS change:
 python manage.py tailwind start
 ```
 
-In a second terminal, start the server:
+In a **second** terminal, start the server:
 
 ```bash
 python manage.py runserver
@@ -111,6 +112,4 @@ README.md
 - [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/)
 - [Stack Overflow - Scrapy 'ReactorNotRestartable' error](https://stackoverflow.com/questions/45137458/scrapy-twisted-internet-error-reactornotrestartable-error-after-first-run)
 - [Docker](https://www.docker.com/)
-- [Render](https://render.com/)
-- [Docker on Render](https://docs.render.com/docker)
 - [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
