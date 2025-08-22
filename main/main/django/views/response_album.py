@@ -69,7 +69,7 @@ def response_album(request):
             except Album.DoesNotExist:
                 context = {
                     "data": None,
-                    "error": "Could not find anything. Are you sure the typed the artist's name and the album's name correctly?",
+                    "error": "We could not find any artist with this album.",
                 }
                 template = loader.get_template("../../web/templates/error.html")
                 return HttpResponse(template.render(context, request))
