@@ -23,10 +23,13 @@ def response_album(request):
             artist_name = request.GET["artist"]
             album_name = request.GET["album"]
 
+            print(artist_name, "-", album_name)
+
             # Crawling for data if it isn't already stored
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
+                print("Crawling for data")
                 crawler_settings = Settings()
                 crawler_settings.setmodule(scrapy_settings)
                 process = Process(
@@ -35,6 +38,7 @@ def response_album(request):
                 process.start()
                 process.join()
                 process.close()
+                print("Finished crawling")
             try:
                 album = Album.objects.get(
                     album_name__icontains=album_name, artist_name__icontains=artist_name
