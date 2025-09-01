@@ -62,7 +62,7 @@ nano .env
 ```
 
 ```bash
-DJANGO_SECRET_KEY=""
+DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=prod
 DJANGO_ALLOWED_HOSTS=""
 ```
