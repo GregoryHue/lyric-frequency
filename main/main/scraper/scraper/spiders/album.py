@@ -33,17 +33,12 @@ class AlbumSpider(scrapy.Spider):
             )
 
     def parse_song(self, response, album_name, i):
-        print(1)
         track_item = ItemLoader(item=TrackItem())
-        print(2)
         track_item.default_output_processor = TakeFirst()
-        print(3)
         track_name = response.xpath(
             '//span[contains(@class, "SongHeader-desktop__HiddenMask")]//text()'
         ).get()
-        print(4)
         track_item.add_value("track_order", i)
-        print(5)
         track_item.add_value("track_name", track_name)
         print(" --- Track name:", track_name)
         track_item.add_value("album", album_name)
@@ -58,21 +53,31 @@ class AlbumSpider(scrapy.Spider):
         yield track_item.load_item()
 
     def parse_album(self, response, genius_url):
+        print(1)
         try:
+            print(2)
             album_item = ItemLoader(item=AlbumItem())
+            print(3)
             album_item.default_output_processor = TakeFirst()
+            print(4)
             album_item.add_value("genius_url", genius_url)
+            print(5)
             album_image = response.xpath(
                 '//div[@class="header_with_cover_art-inner column_layout"]//img/@src'
             ).extract_first()
+            print(6)
             album_item.add_value("album_image_url", album_image)
+            print(7)
             artist_name = response.xpath(
                 '//div[@class="header_with_cover_art-primary_info"]//h2//a//text()'
             ).get()
+            print(8)
             album_item.add_value("artist_name", artist_name)
+            print(9)
             album_name = response.xpath(
                 '//h1[@class="header_with_cover_art-primary_info-title header_with_cover_art-primary_info-title--white"]//text()'
             ).get()
+            print(10)
             album_item.add_value("album_name", album_name)
             print(" --- Album name:", album_name)
             yield album_item.load_item()
