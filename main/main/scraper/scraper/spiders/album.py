@@ -13,7 +13,7 @@ class AlbumSpider(scrapy.Spider):
     def start_requests(
         self,
     ):
-        print("Starting spider")
+        print(" --- Starting spider")
         # Reading user input and removing special characters
         artist_name = re.sub(r"[^a-zA-Z ]", "", self.artist_name)
         album_name = re.sub(r"[^a-zA-Z ]", "", self.album_name)
@@ -25,7 +25,7 @@ class AlbumSpider(scrapy.Spider):
         ]
         # Fetching lyrics from Genius.com
         for url in urls:
-            print(url)
+            print(" --- Url:", url)
             yield scrapy.Request(
                 url=url,
                 callback=self.parse_album,
@@ -40,7 +40,7 @@ class AlbumSpider(scrapy.Spider):
         ).get()
         track_item.add_value("track_order", i)
         track_item.add_value("track_name", track_name)
-        print(track_name)
+        print(" --- Track name:", track_name)
         track_item.add_value("album", album_name)
         lyrics = ""
         for lyric in response.xpath(
@@ -69,7 +69,7 @@ class AlbumSpider(scrapy.Spider):
                 '//h1[@class="header_with_cover_art-primary_info-title header_with_cover_art-primary_info-title--white"]//text()'
             ).get()
             album_item.add_value("album_name", album_name)
-            print(album_name)
+            print(" --- Album name:", album_name)
             yield album_item.load_item()
             i = 0
             for track in response.xpath(
