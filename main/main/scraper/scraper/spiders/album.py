@@ -33,12 +33,17 @@ class AlbumSpider(scrapy.Spider):
             )
 
     def parse_song(self, response, album_name, i):
+        print(1)
         track_item = ItemLoader(item=TrackItem())
+        print(2)
         track_item.default_output_processor = TakeFirst()
+        print(3)
         track_name = response.xpath(
             '//span[contains(@class, "SongHeader-desktop__HiddenMask")]//text()'
         ).get()
+        print(4)
         track_item.add_value("track_order", i)
+        print(5)
         track_item.add_value("track_name", track_name)
         print(" --- Track name:", track_name)
         track_item.add_value("album", album_name)

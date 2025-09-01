@@ -81,6 +81,14 @@ def response_album(request):
                 }
                 template = loader.get_template("../../web/templates/error.html")
                 return HttpResponse(template.render(context, request))
+            except Exception as e:
+                print(e)
+                context = {
+                    "data": None,
+                    "error": e.message,
+                }
+                template = loader.get_template("../../web/templates/error.html")
+                return HttpResponse(template.render(context, request))
         else:
             context = {
                 "data": None,
