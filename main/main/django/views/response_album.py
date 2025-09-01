@@ -23,7 +23,11 @@ def response_album(request):
             artist_name = request.GET["artist"]
             album_name = request.GET["album"]
 
-            print(artist_name, "-", album_name)
+            print("Searching for:", artist_name, "-", album_name)
+
+            print(Album.objects.filter(
+                album_name=album_name, artist_name=artist_name
+            ).exists())
 
             # Crawling for data if it isn't already stored
             if not Album.objects.filter(
