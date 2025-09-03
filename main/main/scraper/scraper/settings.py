@@ -13,7 +13,7 @@ BOT_NAME = "scraper"
 SPIDER_MODULES = ["main.scraper.scraper.spiders"]
 NEWSPIDER_MODULE = "main.scraper.scraper.spiders"
 
-LOG_LEVEL = "ERROR"  # to only display errors
+LOG_LEVEL = "DEBUG"  # to only display errors
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"

@@ -70,7 +70,7 @@ DJANGO_ALLOWED_HOSTS=""
 Then, start your first container:
 
 ```bash
-docker build -t lyric-frequency . && docker run --name lyric-frequency -itd -p 80:8000 lyric-frequency
+docker build -t lyric-frequency . && docker run -m 512m --memory-swap 512m --name lyric-frequency -itd -p 80:8000 lyric-frequency
 ```
 
 Go to [http://localhost](http://localhost)
