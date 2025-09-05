@@ -26,6 +26,7 @@ nano .env
 DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=dev
 DJANGO_ALLOWED_HOSTS=""
+GENIUS_ACCESS_TOKEN=
 ```
 
 Setup the project:
@@ -38,6 +39,7 @@ pip install -r requirements.txt
 python manage.py tailwind install
 python manage.py makemigrations django
 python manage.py migrate
+python manage.py loaddata base_data.json
 ```
 
 Then, in a first terminal, start tailwind to update any CSS change:
@@ -65,6 +67,7 @@ nano .env
 DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=prod
 DJANGO_ALLOWED_HOSTS=""
+GENIUS_ACCESS_TOKEN=
 ```
 
 Then, start your first container:

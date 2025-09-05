@@ -7,6 +7,9 @@ from main.scraper.scraper import settings as scrapy_settings
 from main.scraper.scraper.spiders.album import AlbumSpider
 from scrapy.settings import Settings
 from multiprocessing.context import Process
+from lyricsgenius import Genius
+import os
+import re
 
 
 def crawl(crawler_settings, artist_name, album_name):
@@ -23,26 +26,52 @@ def response_album(request):
             artist_name = request.GET["artist"]
             album_name = request.GET["album"]
 
-            print(" --- Searching for:", "\"" + artist_name, "-", album_name + "\"")
-
-            print(Album.objects.filter(
-                album_name=album_name, artist_name=artist_name
-            ).exists())
 
             # Crawling for data if it isn't already stored
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
-                print(" --- Crawling for data")
-                crawler_settings = Settings()
-                crawler_settings.setmodule(scrapy_settings)
-                process = Process(
-                    target=crawl, args=(crawler_settings, artist_name, album_name)
+                print(" --- ", end="")
+                access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
+                genius = Genius(access_token)
+                album_content = genius.search_album(album_name, artist_name)
+                album_content = album_content.to_dict()
+                found_album_name = album_content["name"]
+                found_artist_name = album_content["artist"]
+
+                album = Album.objects.create(
+                    album_name=found_album_name,
+                    artist_name=found_artist_name,
+                    album_image_url=album_content["cover_art_thumbnail_url"],
+                    genius_url=album_content["url"],
                 )
-                process.start()
-                process.join()
-                process.close()
-                print(" --- Finished crawling")
+
+                album.save()
+
+                for song in album_content["tracks"]:
+                    print(song["song"]["title"])
+                    lyrics = song["song"]["lyrics"].replace("\n", " ")
+                    lyrics = re.sub(r"\[.*?\]", "", lyrics)
+                    track = Track.objects.create(
+                        track_name=song["song"]["title"],
+                        lyrics=lyrics,
+                        album=album,
+                        track_order=song["number"],
+                    )
+                    track.save()
+
+                # COMMENTING THIS BECAUSE WE'RE SWITCHING TO GENIUS API
+                # print(" --- Crawling for data")
+                # crawler_settings = Settings()
+                # crawler_settings.setmodule(scrapy_settings)
+                # process = Process(
+                #     target=crawl, args=(crawler_settings, artist_name, album_name)
+                # )
+                # process.start()
+                # process.join()
+                # process.close()
+                # print(" --- Finished crawling")
+
             try:
                 album = Album.objects.get(
                     album_name__icontains=album_name, artist_name__icontains=artist_name

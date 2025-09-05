@@ -9,7 +9,7 @@ WORKDIR /usr/src/app/main/main/web/static_src
 RUN npm install
 RUN npm run build
 
-FROM python:3.10-bookworm
+FROM python:3.12-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1

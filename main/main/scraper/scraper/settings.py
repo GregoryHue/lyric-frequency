@@ -13,13 +13,13 @@ BOT_NAME = "scraper"
 SPIDER_MODULES = ["main.scraper.scraper.spiders"]
 NEWSPIDER_MODULE = "main.scraper.scraper.spiders"
 
-LOG_LEVEL = "DEBUG"  # to only display errors
+LOG_LEVEL = "ERROR"  # to only display errors
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 8
@@ -41,11 +41,10 @@ REACTOR_THREADPOOL_MAXSIZE = 10
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en",
-    "Referer": "https://genius.com/",
-}
+# DEFAULT_REQUEST_HEADERS = {
+#    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+#    "Accept-Language": "en",
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
