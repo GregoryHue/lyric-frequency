@@ -69,7 +69,8 @@ def response_album(request):
                     print(e.args[1])  # error message
                 except Timeout as e:
                     print(e)
-                    pass
+                except Exception as e:
+                    print(e)
                 # COMMENTING THIS BECAUSE WE'RE SWITCHING TO GENIUS API
                 # print(" --- Crawling for data")
                 # crawler_settings = Settings()
