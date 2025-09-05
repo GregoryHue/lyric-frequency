@@ -8,6 +8,7 @@ from main.scraper.scraper.spiders.album import AlbumSpider
 from scrapy.settings import Settings
 from multiprocessing.context import Process
 from lyricsgenius import Genius
+from requests.exceptions import HTTPError, Timeout
 import os
 import re
 
@@ -31,37 +32,44 @@ def response_album(request):
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
-                print(" --- ", end="")
-                access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
-                print(access_token)
-                genius = Genius(access_token)
-                album_content = genius.search_album(album_name, artist_name)
-                album_content = album_content.to_dict()
-                found_album_name = album_content["name"]
-                found_artist_name = album_content["artist"]
-                print(found_album_name, album_content)
+                try:
+                    print(" --- ", end="")
+                    access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
+                    print(access_token)
+                    genius = Genius(access_token)
+                    album_content = genius.search_album(album_name, artist_name)
+                    album_content = album_content.to_dict()
+                    found_album_name = album_content["name"]
+                    found_artist_name = album_content["artist"]
+                    print(found_album_name, album_content)
 
-                album = Album.objects.create(
-                    album_name=found_album_name,
-                    artist_name=found_artist_name,
-                    album_image_url=album_content["cover_art_thumbnail_url"],
-                    genius_url=album_content["url"],
-                )
-
-                album.save()
-
-                for song in album_content["tracks"]:
-                    print(song["song"]["title"])
-                    lyrics = song["song"]["lyrics"].replace("\n", " ")
-                    lyrics = re.sub(r"\[.*?\]", "", lyrics)
-                    track = Track.objects.create(
-                        track_name=song["song"]["title"],
-                        lyrics=lyrics,
-                        album=album,
-                        track_order=song["number"],
+                    album = Album.objects.create(
+                        album_name=found_album_name,
+                        artist_name=found_artist_name,
+                        album_image_url=album_content["cover_art_thumbnail_url"],
+                        genius_url=album_content["url"],
                     )
-                    track.save()
 
+                    album.save()
+
+                    for song in album_content["tracks"]:
+                        print(song["song"]["title"])
+                        lyrics = song["song"]["lyrics"].replace("\n", " ")
+                        lyrics = re.sub(r"\[.*?\]", "", lyrics)
+                        track = Track.objects.create(
+                            track_name=song["song"]["title"],
+                            lyrics=lyrics,
+                            album=album,
+                            track_order=song["number"],
+                        )
+                        track.save()
+                except HTTPError as e:
+                    print(e.errno)    # status code
+                    print(e.args[0])  # status code
+                    print(e.args[1])  # error message
+                except Timeout as e:
+                    print(e)
+                    pass
                 # COMMENTING THIS BECAUSE WE'RE SWITCHING TO GENIUS API
                 # print(" --- Crawling for data")
                 # crawler_settings = Settings()
