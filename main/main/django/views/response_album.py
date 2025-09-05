@@ -33,11 +33,13 @@ def response_album(request):
             ).exists():
                 print(" --- ", end="")
                 access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
+                print(access_token)
                 genius = Genius(access_token)
                 album_content = genius.search_album(album_name, artist_name)
                 album_content = album_content.to_dict()
                 found_album_name = album_content["name"]
                 found_artist_name = album_content["artist"]
+                print(found_album_name, album_content)
 
                 album = Album.objects.create(
                     album_name=found_album_name,
