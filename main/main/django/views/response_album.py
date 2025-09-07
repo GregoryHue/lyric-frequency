@@ -32,56 +32,52 @@ def response_album(request):
             if not Album.objects.filter(
                 album_name=album_name, artist_name=artist_name
             ).exists():
-                try:
-                    print(" --- ", end="")
-                    access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
-                    print(access_token)
-                    genius = Genius(access_token)
-                    album_content = genius.search_album(album_name, artist_name)
-                    album_content = album_content.to_dict()
-                    found_album_name = album_content["name"]
-                    found_artist_name = album_content["artist"]
-                    print(found_album_name, album_content)
+                print(" --- Crawling for data")
+                crawler_settings = Settings()
+                crawler_settings.setmodule(scrapy_settings)
+                process = Process(
+                    target=crawl, args=(crawler_settings, artist_name, album_name)
+                )
+                process.start()
+                process.join()
+                process.close()
+                print(" --- Finished crawling")
+                #     print(" --- ", end="")
+                #     access_token = os.environ.get("GENIUS_ACCESS_TOKEN")
+                #     genius = Genius(access_token)
+                #     album_content = genius.search_album(album_name, artist_name)
+                #     album_content = album_content.to_dict()
+                #     found_album_name = album_content["name"]
+                #     found_artist_name = album_content["artist"]
 
-                    album = Album.objects.create(
-                        album_name=found_album_name,
-                        artist_name=found_artist_name,
-                        album_image_url=album_content["cover_art_thumbnail_url"],
-                        genius_url=album_content["url"],
-                    )
+                #     album = Album.objects.create(
+                #         album_name=found_album_name,
+                #         artist_name=found_artist_name,
+                #         album_image_url=album_content["cover_art_thumbnail_url"],
+                #         genius_url=album_content["url"],
+                #     )
 
-                    album.save()
+                #     album.save()
 
-                    for song in album_content["tracks"]:
-                        print(song["song"]["title"])
-                        lyrics = song["song"]["lyrics"].replace("\n", " ")
-                        lyrics = re.sub(r"\[.*?\]", "", lyrics)
-                        track = Track.objects.create(
-                            track_name=song["song"]["title"],
-                            lyrics=lyrics,
-                            album=album,
-                            track_order=song["number"],
-                        )
-                        track.save()
-                except HTTPError as e:
-                    print(e.errno)    # status code
-                    print(e.args[0])  # status code
-                    print(e.args[1])  # error message
-                except Timeout as e:
-                    print(e)
-                except Exception as e:
-                    print(e)
+                #     for song in album_content["tracks"]:
+                #         lyrics = song["song"]["lyrics"].replace("\n", " ")
+                #         lyrics = re.sub(r"\[.*?\]", "", lyrics)
+                #         track = Track.objects.create(
+                #             track_name=song["song"]["title"],
+                #             lyrics=lyrics,
+                #             album=album,
+                #             track_order=song["number"],
+                #         )
+                #         track.save()
+                # except HTTPError as e:
+                #     print(e.errno)    # status code
+                #     print(e.args[0])  # status code
+                #     print(e.args[1])  # error message
+                # except Timeout as e:
+                #     print(e)
+                # except Exception as e:
+                #     print(e)
                 # COMMENTING THIS BECAUSE WE'RE SWITCHING TO GENIUS API
-                # print(" --- Crawling for data")
-                # crawler_settings = Settings()
-                # crawler_settings.setmodule(scrapy_settings)
-                # process = Process(
-                #     target=crawl, args=(crawler_settings, artist_name, album_name)
-                # )
-                # process.start()
-                # process.join()
-                # process.close()
-                # print(" --- Finished crawling")
 
             try:
                 album = Album.objects.get(

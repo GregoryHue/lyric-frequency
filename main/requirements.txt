@@ -15,6 +15,8 @@ django-browser-reload==1.18.0
 django-filter==25.1
 django-tailwind==4.2.0
 djangorestframework==3.16.1
+fake-useragent==2.2.0
+Faker==37.6.0
 filelock==3.19.1
 gunicorn==23.0.0
 hyperlink==21.0.0
@@ -48,6 +50,8 @@ requests-file==2.1.0
 ruff==0.12.11
 Scrapy==2.13.3
 scrapy-djangoitem==1.1.1
+scrapy-fake-useragent==1.4.4
+scrapy-proxies==0.4
 service-identity==24.2.0
 setuptools==80.9.0
 six==1.17.0
