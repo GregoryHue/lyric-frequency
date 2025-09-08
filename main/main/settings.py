@@ -27,6 +27,7 @@ load_dotenv(dotenv_path)
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 print("DJANGO_ALLOWED_HOSTS", os.environ.get("DJANGO_ALLOWED_HOSTS"))
+print("PROXY", os.environ.get("PROXY"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")

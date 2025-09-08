@@ -3,6 +3,7 @@ from scrapy.loader import ItemLoader
 from main.scraper.scraper.items import AlbumItem, TrackItem
 from itemloaders.processors import TakeFirst
 import re
+import os
 
 
 class AlbumSpider(scrapy.Spider):
@@ -29,6 +30,7 @@ class AlbumSpider(scrapy.Spider):
             yield scrapy.Request(
                 url=url,
                 callback=self.parse_album,
+                meta={"proxy": os.environ.get("PROXY")},
                 cb_kwargs={"genius_url": url},
             )
 
@@ -79,6 +81,7 @@ class AlbumSpider(scrapy.Spider):
                 yield scrapy.Request(
                     url=track,
                     callback=self.parse_song,
+                meta={"proxy": os.environ.get("PROXY")},
                     cb_kwargs={"album_name": album_name, "i": i},
                 )
 

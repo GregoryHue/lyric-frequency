@@ -56,12 +56,12 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
-    'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
-    'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+#     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
+#     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
+#     'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
+# }
 
 
 # Enable or disable extensions
@@ -106,29 +106,3 @@ FEED_EXPORT_ENCODING = "utf-8"
 AUTOTHROTTLE_ENABLED = True
 AUTOTHROTTLE_START_DELAY = 0.1
 AUTOTHROTTLE_MAX_DELAY = 0.5
-
-FAKEUSERAGENT_PROVIDERS = [
-    'scrapy_fake_useragent.providers.FakeUserAgentProvider'
-]
-
-FAKEUSERAGENT_FALLBACK = 'Mozilla/5.0 (Android; Mobile; rv:40.0)'
-
-# Retry many times since proxies often fail
-RETRY_TIMES = 10
-# Retry on most error codes since proxies fail for different reasons
-RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
-
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
-    'scrapy_proxies.RandomProxy': 100,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
-}
-
-# Proxy mode
-# 0 = Every requests have different proxy
-# 1 = Take only one proxy from the list and assign it to every requests
-# 2 = Put a custom proxy to use in the settings
-PROXY_MODE = 2
-
-# If proxy mode is 2 uncomment this sentence :
-CUSTOM_PROXY = "http://51.254.121.123:8088"

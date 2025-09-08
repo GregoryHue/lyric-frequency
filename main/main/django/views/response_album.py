@@ -7,10 +7,6 @@ from main.scraper.scraper import settings as scrapy_settings
 from main.scraper.scraper.spiders.album import AlbumSpider
 from scrapy.settings import Settings
 from multiprocessing.context import Process
-from lyricsgenius import Genius
-from requests.exceptions import HTTPError, Timeout
-import os
-import re
 
 
 def crawl(crawler_settings, artist_name, album_name):
