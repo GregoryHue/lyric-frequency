@@ -2,11 +2,11 @@
 
 # Lyric Frequency
 
+⚠️*This project is on hold as Genius.com has decided to forbid requests from Google, breaking the web-scrapping function of this web-service in production. It still works as intended with a local Docker instance*.⚠️
+
 Lyric Frequency is a web-application that lets you search for an album and displays the occurrence of each word in the album.
 
-[https://lyric-frequency-56927045982.europe-west9.run.app](https://lyric-frequency-56927045982.europe-west9.run.app)
-
-*Please be patient, this is running on a Google Cloud VM with 512MB of RAM*
+~~[https://lyric-frequency-56927045982.europe-west9.run.app](https://lyric-frequency-56927045982.europe-west9.run.app)~~
 
 <p align="center" style="padding-top: 12px;">
   <img src="https://github.com/GregoryHue/lyric-frequency/blob/main/main/main/web/static/screenshot.jpg?raw=true" alt="Lyric Frequency Screenshot"/>
@@ -26,7 +26,6 @@ nano .env
 DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=dev
 DJANGO_ALLOWED_HOSTS=""
-GENIUS_ACCESS_TOKEN=
 ```
 
 Setup the project:
@@ -67,7 +66,6 @@ nano .env
 DJANGO_SECRET_KEY="<YOUR_SECRET_KEY>"
 DJANGO_ENV=prod
 DJANGO_ALLOWED_HOSTS=""
-GENIUS_ACCESS_TOKEN=
 ```
 
 Then, start your first container:
@@ -111,7 +109,6 @@ README.md
 - [scrapy-djangoitem](https://pypi.org/project/scrapy-djangoitem/)
 - [HTMX - high power tools for HTML](https://htmx.org/)
 - [Plotly Open Source Graphing Library for Python](https://plotly.com/python/)
-- [Supabase](https://supabase.com/)
 - [WhiteNoise](https://whitenoise.readthedocs.io/en/latest/)
 - [Stack Overflow - Scrapy 'ReactorNotRestartable' error](https://stackoverflow.com/questions/45137458/scrapy-twisted-internet-error-reactornotrestartable-error-after-first-run)
 - [Docker](https://www.docker.com/)

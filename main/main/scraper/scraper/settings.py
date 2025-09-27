@@ -57,12 +57,11 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-#     'scrapy.downloadermiddlewares.retry.RetryMiddleware': None,
-#     'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware': 400,
-#     'scrapy_fake_useragent.middleware.RetryUserAgentMiddleware': 401,
+#     'rotating_proxies.middlewares.RotatingProxyMiddleware': 200,
+#     'rotating_proxies.middlewares.BanDetectionMiddleware': 200,
 # }
 
+# ROTATING_PROXY_LIST_PATH = "main/scraper/rotating_proxy_list.txt"
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
